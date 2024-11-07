@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: volumes-deployment
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: volumes-app
@@ -21,3 +22,10 @@ spec:
             limits:
               memory: 256Mi
               cpu: 500m
+          volumeMounts:
+            - mountPath: /app/story
+              name: story-volume
+      volumes:
+        - name: story-volume
+          emptyDir: 
+            sizeLimit: 500Mi
