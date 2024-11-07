@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: volumes-service
+spec:
+  selector:
+    app: volumes-app
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3000

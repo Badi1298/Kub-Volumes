@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: volumes-deployment
+spec:
+  selector:
+    matchLabels:
+      app: volumes-app
+  template:
+    metadata:
+      labels:
+        app: volumes-app
+    spec:
+      containers:
+        - name: node-volumes
+          image: badi1298/node-volumes
+          resources:
+            requests:
+              memory: 128Mi
+              cpu: 250m
+            limits:
+              memory: 256Mi
+              cpu: 500m
