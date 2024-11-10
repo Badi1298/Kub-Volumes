@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: node-volumes
-          image: badi1298/node-volumes
+          image: badi1298/node-volumes:2
           resources:
             requests:
               memory: 128Mi
@@ -22,11 +22,16 @@ spec:
             limits:
               memory: 256Mi
               cpu: 500m
+          env:
+            - name: STORY_FOLDER
+              valueFrom:
+                configMapKeyRef:
+                  name: data-store-env
+                  key: folder
           volumeMounts:
             - mountPath: /app/story
               name: story-volume
       volumes:
         - name: story-volume
-          hostPath:
-            path: /data
-            type: DirectoryOrCreate
+          persistentVolumeClaim:
+            claimName: host-pvc
